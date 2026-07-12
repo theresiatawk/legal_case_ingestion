@@ -23,6 +23,8 @@ AUTOTHROTTLE_TARGET_CONCURRENCY = float(os.environ.get("SCRAPY_AUTOTHROTTLE_TARG
 RETRY_TIMES = int(os.environ.get("SCRAPY_RETRY_TIMES", "3"))
 RETRY_HTTP_CODES = [429, 500, 502, 503, 504]
 
+ITEM_PIPELINES = {"wrc_scraper.pipelines.IdempotentStoragePipeline": 300}
+
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"

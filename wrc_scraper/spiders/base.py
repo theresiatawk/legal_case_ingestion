@@ -34,7 +34,13 @@ class BaseCaseSpider(scrapy.Spider):
             body_id = self.bodies[body_name]
             for partition in partitions:
                 key = (body_name, partition.label)
-                self.stats_by_partition[key] = {"found": 0, "scraped": 0, "failed": 0, "site_reported_total": None}
+                self.stats_by_partition[key] = {
+                    "found": 0,
+                    "scraped": 0,
+                    "skipped_unchanged": 0,
+                    "failed": 0,
+                    "site_reported_total": None,
+                }
                 self.json_log.info("partition_start", extra={"body": body_name, "partition_date": partition.label})
                 url = self.build_listing_url(body_id, partition, page_number=1)
                 yield scrapy.Request(
