@@ -70,6 +70,7 @@ class BaseCaseSpider(scrapy.Spider):
             "request_failed",
             extra={
                 "url": request.url,
+                "identifier": request.meta.get("identifier"),
                 "body": body,
                 "partition_date": partition.label if partition else None,
                 "error": repr(failure.value),
