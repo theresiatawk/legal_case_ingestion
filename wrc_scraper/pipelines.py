@@ -2,15 +2,9 @@ from __future__ import annotations
 
 from common.blob_storage import ensure_bucket, upload_bytes
 from common.config import settings
+from common.content_types import CONTENT_TYPES
 from common.hashing import normalize_html_for_hash, sha256_of_bytes
 from common.mongo import get_landing_collection
-
-CONTENT_TYPES = {
-    "html": "text/html",
-    "pdf": "application/pdf",
-    "doc": "application/msword",
-    "docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-}
 
 METADATA_FIELDS = ("title", "description", "date", "doc_url", "detail_url", "partition_date")
 

@@ -22,6 +22,13 @@ def get_client() -> BaseClient:
     return _client
 
 
+def parse_s3_uri(uri: str) -> tuple[str, str]:
+    if not uri.startswith("s3://"):
+        raise ValueError(f"Not an s3:// uri: {uri!r}")
+    bucket, _, key = uri.removeprefix("s3://").partition("/")
+    return bucket, key
+
+
 def ensure_bucket(bucket: str) -> None:
     client = get_client()
     existing = {b["Name"] for b in client.list_buckets()["Buckets"]}
