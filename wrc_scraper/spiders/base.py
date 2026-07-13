@@ -19,6 +19,9 @@ class BaseCaseSpider(scrapy.Spider):
         self.start_date = datetime.strptime(start_date, "%Y-%m-%d").date()
         self.end_date = datetime.strptime(end_date, "%Y-%m-%d").date()
         self.selected_bodies = bodies.split(",") if bodies else list(self.bodies.keys())
+        invalid_bodies = set(self.selected_bodies) - set(self.bodies.keys())
+        if invalid_bodies:
+            raise ValueError(f"Unknown body name(s): {sorted(invalid_bodies)}. Valid options: {sorted(self.bodies.keys())}")
         self.partition_unit = os.environ.get("PARTITION_UNIT", "months")
         self.partition_size = int(os.environ.get("PARTITION_SIZE", "1"))
         self.json_log = get_logger(self.name)

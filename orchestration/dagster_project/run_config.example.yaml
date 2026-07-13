@@ -1,0 +1,9 @@
+resources:
+  date_range:
+    config:
+      start_date: "2024-06-01"
+      end_date: "2024-06-08"
+ops:
+  scrape_op:
+    config:
+      bodies: "labour_court"
